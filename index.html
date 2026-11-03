@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101a18">
+  <meta name="description" content="Uma Palavra Para Hoje — uma mensagem de fé para o seu dia.">
+  <title>Uma Palavra Para Hoje</title>
+  <style>
+    :root{--bg:#101a18;--panel:#192622;--gold:#d8b875;--cream:#f6f0e4;--muted:#b9c1b8;--line:#ffffff1c}
+    *{box-sizing:border-box}
+    body{margin:0;min-height:100vh;color:var(--cream);font-family:Georgia,"Times New Roman",serif;background:radial-gradient(ellipse at 50% 0%,#30443a 0%,#17251f 42%,#0c1412 100%);display:grid;place-items:center;padding:24px;overflow-x:hidden}
+    .glow{position:fixed;width:340px;height:340px;border-radius:50%;background:#d8b87512;filter:blur(55px);top:8%;left:50%;transform:translateX(-50%);pointer-events:none}
+    main{width:min(100%,510px);position:relative;text-align:center}
+    .mark{width:58px;height:58px;border:1px solid #d8b87588;border-radius:50%;display:grid;place-items:center;margin:0 auto 20px;color:var(--gold);font-size:27px}
+    .eyebrow{font:600 11px/1.4 system-ui,sans-serif;letter-spacing:.24em;text-transform:uppercase;color:var(--gold)}
+    h1{font-size:clamp(35px,9vw,54px);line-height:1.05;font-weight:400;margin:13px 0 14px;letter-spacing:-.035em}
+    .intro{font:15px/1.7 system-ui,sans-serif;color:var(--muted);max-width:370px;margin:0 auto 30px}
+    .card{background:linear-gradient(145deg,#23332c,#17231f);border:1px solid var(--line);border-radius:24px;padding:clamp(25px,7vw,38px) clamp(20px,6vw,34px);box-shadow:0 22px 70px #0005;position:relative;overflow:hidden}
+    .card:before{content:"";position:absolute;inset:8px;border:1px solid #d8b87522;border-radius:18px;pointer-events:none}
+    .verse-label{font:600 10px system-ui,sans-serif;letter-spacing:.2em;text-transform:uppercase;color:var(--gold)}
+    blockquote{font-size:clamp(24px,6vw,32px);line-height:1.42;margin:19px 0 16px}
+    .reference{font:600 13px system-ui,sans-serif;color:var(--gold);letter-spacing:.08em}
+    .reflection{font:14px/1.75 system-ui,sans-serif;color:#d0d6ce;margin:24px auto 0;max-width:370px}
+    button{font:600 14px system-ui,sans-serif;cursor:pointer;border:0;transition:transform .2s,box-shadow .2s,background .2s}
+    button:focus-visible{outline:3px solid #f6d99b;outline-offset:4px}
+    .primary{display:inline-flex;align-items:center;justify-content:center;gap:10px;background:var(--gold);color:#18221d;border-radius:999px;padding:17px 27px;min-height:54px;box-shadow:0 8px 28px #d8b87535;animation:pulse 2.5s infinite}
+    .primary:hover{transform:translateY(-3px);box-shadow:0 12px 34px #d8b87555}
+    .secondary{background:transparent;border:1px solid #d8b87577;color:var(--cream);border-radius:999px;padding:14px 20px}
+    .secondary:hover{background:#ffffff0c;transform:translateY(-2px)}
+    .actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:27px}
+    .back{display:inline-flex;align-items:center;gap:6px;margin:0 0 16px;padding:10px 16px;background:transparent;border:1px solid #d8b87577;color:var(--cream);border-radius:999px;font:600 13px system-ui,sans-serif}
+    .back:hover{background:#ffffff0c;transform:translateY(-2px)}
+    .backwrap{text-align:left}
+    .hidden{display:none!important}
+    .message{margin:24px auto 0;padding:20px;border:1px solid #d8b87555;border-radius:18px;background:#d8b8750c;max-width:420px}
+    .message strong{display:block;color:var(--gold);font-size:18px;font-weight:400;margin-bottom:8px}
+    .message p{font:14px/1.7 system-ui,sans-serif;color:var(--muted);margin:0}
+    footer{font:11px/1.6 system-ui,sans-serif;color:#87948a;margin-top:28px}
+    footer a{color:var(--gold)}
+    .fade{animation:fade .65s ease both}
+    @keyframes pulse{0%,100%{box-shadow:0 8px 28px #d8b87525}50%{box-shadow:0 8px 36px #d8b87570}}
+    @keyframes fade{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+    @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+  </style>
+</head>
+<body>
+  <div class="glow"></div>
+  <main>
+    <div class="mark" aria-hidden="true">✦</div>
+    <div class="eyebrow">Um momento de fé</div>
+    <h1>Uma Palavra<br>Para Hoje</h1>
+    <p class="intro" id="intro">Às vezes, uma pequena pausa é tudo de que precisamos. Há uma mensagem esperando por você.</p>
+
+    <section class="card fade" id="verseCard" aria-live="polite">
+      <div class="verse-label">Sua palavra de hoje</div>
+      <blockquote id="verseText">“Entrega o teu caminho ao Senhor; confia nele, e ele tudo fará.”</blockquote>
+      <div class="reference" id="verseRef">Salmos 37:5</div>
+      <p class="reflection" id="reflection">Você não precisa ter todas as respostas agora. Faça a sua parte, caminhe com fé e entregue a Deus aquilo que não está ao seu alcance.</p>
+      <div class="actions">
+        <button class="primary" id="shareBtn">↗ Compartilhar no WhatsApp</button>
+        <button class="secondary" id="saveBtn">♡ Guardar esta mensagem</button>
+        <button class="secondary" id="anotherBtn">Quero outra palavra</button>
+      </div>
+    </section>
+
+    <section class="message hidden fade" id="waitMessage" aria-live="polite">
+      <div class="backwrap"><button class="back" id="backBtn" type="button">← Voltar</button></div>
+      <strong>Esta página já tem uma palavra para você hoje. ❤️</strong>
+      <p>Que tal guardar essa mensagem no coração? Amanhã, volte e descubra uma nova palavra preparada para você.</p>
+      <p id="nextTime" style="margin-top:12px"></p>
+    </section>
+
+    <footer>Uma mensagem de fé para compartilhar.<br>Leia, reflita e confira sempre o contexto da passagem bíblica.</footer>
+  </main>
+<script>
+  // Demonstração inicial. Antes de publicar, substitua/valide os textos
+  // com uma tradução cuja licença permita a reprodução no seu site.
+  const verses = [
+    {text:"Entrega o teu caminho ao Senhor; confia nele, e ele tudo fará.",ref:"Salmos 37:5",reflection:"Você não precisa ter todas as respostas agora. Faça a sua parte, caminhe com fé e entregue a Deus aquilo que não está ao seu alcance."},
+    {text:"O Senhor é o meu pastor; nada me faltará.",ref:"Salmos 23:1",reflection:"Mesmo nos dias incertos, você não está sem direção. Respire, siga um passo de cada vez e encontre descanso na confiança."},
+    {text:"Não temas, porque eu sou contigo; não te assombres, porque eu sou teu Deus.",ref:"Isaías 41:10",reflection:"O medo não precisa decidir os seus próximos passos. Lembre-se de que coragem também é continuar, mesmo quando o caminho parece difícil."},
+    {text:"Tudo posso naquele que me fortalece.",ref:"Filipenses 4:13",reflection:"Sua força não precisa vir apenas de você. Peça sabedoria, faça o que estiver ao seu alcance e avance com esperança."},
+    {text:"Aquietai-vos e sabei que eu sou Deus.",ref:"Salmos 46:10",reflection:"Nem toda resposta chega na correria. Às vezes, o primeiro passo é silenciar um pouco e encontrar paz para continuar."},
+    {text:"Confia no Senhor de todo o teu coração e não te estribes no teu próprio entendimento.",ref:"Provérbios 3:5",reflection:"Nem sempre conseguimos compreender tudo o que acontece. Ainda assim, é possível seguir com humildade, confiança e esperança."}
+  ];
+  const KEY="umaPalavraParaHoje_v1", DAY=24*60*60*1000;
+  const $=id=>document.getElementById(id);
+  // Guarda o registro em vários lugares (localStorage, cookie e sessionStorage)
+  // para sobreviver melhor ao navegador interno do Instagram e a abas fechadas.
+  function readRecord(){
+    let found=[];
+    try{const r=JSON.parse(localStorage.getItem(KEY)||"null");if(r)found.push(r)}catch(e){}
+    try{const m=document.cookie.match(new RegExp("(?:^|; )"+KEY+"=([^;]*)"));if(m){const r=JSON.parse(decodeURIComponent(m[1]));if(r)found.push(r)}}catch(e){}
+    try{const r=JSON.parse(sessionStorage.getItem(KEY)||"null");if(r)found.push(r)}catch(e){}
+    found=found.filter(r=>r&&typeof r.index==="number"&&typeof r.expiresAt==="number");
+    if(!found.length)return null;
+    found.sort((a,b)=>b.expiresAt-a.expiresAt);
+    return found[0];
+  }
+  function writeRecord(r){
+    const s=JSON.stringify(r);
+    try{localStorage.setItem(KEY,s)}catch(e){}
+    try{sessionStorage.setItem(KEY,s)}catch(e){}
+    try{document.cookie=KEY+"="+encodeURIComponent(s)+"; max-age="+(DAY/1000)+"; path=/; SameSite=Lax"}catch(e){}
+  }
+  let record=readRecord();
+  const now=Date.now();
+  const active=record && record.expiresAt>now && verses[record.index];
+  function showVerse(v){
+    $("verseText").textContent="“"+v.text+"”";
+    $("verseRef").textContent=v.ref;
+    $("reflection").textContent=v.reflection;
+    $("verseCard").classList.remove("hidden");
+    $("waitMessage").classList.add("hidden");
+  }
+  function showWait(){
+    $("verseCard").classList.add("hidden");
+    $("waitMessage").classList.remove("hidden");
+    const remaining=Math.max(0,record.expiresAt-Date.now());
+    const next=new Date(record.expiresAt);
+    $("nextTime").textContent="Sua próxima mensagem estará disponível em "+next.toLocaleString("pt-BR",{day:"2-digit",month:"2-digit",hour:"2-digit",minute:"2-digit"})+".";
+  }
+  if(active){showVerse(verses[record.index]);}
+  else{$("verseCard").classList.add("hidden");$("intro").textContent="Uma mensagem pode chegar até você na hora certa. Toque no botão para descobrir a sua.";const b=document.createElement("button");b.className="primary";b.id="revealBtn";b.textContent="✨ Descobrir minha palavra";$("intro").after(b);b.addEventListener("click",()=>{const index=Math.floor(Math.random()*verses.length);record={index,createdAt:Date.now(),expiresAt:Date.now()+DAY};writeRecord(record);showVerse(verses[index]);b.remove();$("intro").textContent="Você chegou até aqui. Reserve alguns segundos para esta mensagem.";});}
+  $("anotherBtn").addEventListener("click",showWait);
+  $("backBtn").addEventListener("click",()=>{if(record&&verses[record.index])showVerse(verses[record.index]);});
+  $("shareBtn").addEventListener("click",()=>{const v=verses[record?.index ?? 0];const msg=`Uma Palavra Para Hoje ❤️\n\n“${v.text}”\n${v.ref}\n\n${v.reflection}\n\nReceba sua palavra: ${location.href}`;window.open("https://wa.me/?text="+encodeURIComponent(msg),"_blank","noopener");});
+  $("saveBtn").addEventListener("click",()=>{const v=verses[record?.index ?? 0];const msg=`“${v.text}” — ${v.ref}\n\n${v.reflection}`;if(navigator.share){navigator.share({title:"Uma Palavra Para Hoje",text:msg}).catch(()=>{});}else if(navigator.clipboard){navigator.clipboard.writeText(msg).then(()=>{$("saveBtn").textContent="✓ Mensagem copiada";});}else{$("saveBtn").textContent="Selecione e copie a mensagem";}});
+</script>
+</body>
+</html>
