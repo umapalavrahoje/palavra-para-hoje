@@ -128,5 +128,6 @@
   $("shareBtn").addEventListener("click",()=>{const v=verses[record?.index ?? 0];const msg=`Uma Palavra Para Hoje ❤️\n\n“${v.text}”\n${v.ref}\n\n${v.reflection}\n\nReceba sua palavra: ${location.href}`;window.open("https://wa.me/?text="+encodeURIComponent(msg),"_blank","noopener");});
   $("saveBtn").addEventListener("click",()=>{const v=verses[record?.index ?? 0];const msg=`“${v.text}” — ${v.ref}\n\n${v.reflection}`;if(navigator.share){navigator.share({title:"Uma Palavra Para Hoje",text:msg}).catch(()=>{});}else if(navigator.clipboard){navigator.clipboard.writeText(msg).then(()=>{$("saveBtn").textContent="✓ Mensagem copiada";});}else{$("saveBtn").textContent="Selecione e copie a mensagem";}});
 </script>
+<script data-goatcounter="https://palavrahoje.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>
 </html>
